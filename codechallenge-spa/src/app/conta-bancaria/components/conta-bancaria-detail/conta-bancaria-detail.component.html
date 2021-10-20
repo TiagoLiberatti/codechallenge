@@ -1,0 +1,21 @@
+<h3>Detalhes Conta Bancária de Número: {{contaBancariaId}}</h3>
+<div class="col-md-12">
+  <div class="col-md-6">
+    <h4>Nome</h4> <p>{{contaBancaria.nome}}</p>
+  </div>
+  <div class="col-md-6">
+    <h4>Agência/Número Conta</h4> <p>{{contaBancaria.agenciaNumero}}</p>
+  </div>
+  <div class="col-md-6">
+    <h4>Saldo</h4> <p>{{contaBancaria.saldo}}</p>
+  </div>
+  <div class="col-md-6">
+    <h4>Cheque Especial Liberado</h4> <p>{{contaBancaria.chequeEspecialLiberado}}</p>
+  </div>
+  <div class="col-md-6">
+    <h4>Valor Cheque Especial Dia Seguinte</h4> <p>{{contaBancaria.valorChequeEspecialDiaSeguinte}}</p>
+  </div>
+  <div class="col-md-12 wrapper">
+    <button class="btn btn-default" (click)="voltar()">Voltar</button>
+  </div>
+</div>
