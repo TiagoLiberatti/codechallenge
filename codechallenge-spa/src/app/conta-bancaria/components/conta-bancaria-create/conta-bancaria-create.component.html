@@ -1,0 +1,32 @@
+<h3 class="m-b-3">Cadastrar Conta Bancária</h3>  
+<form [formGroup]="form" autocomplete="off">     
+  <div class="col-md-12">
+    <label for="nome">Nome</label>
+    <input type="text" name="nome" id="nome" formControlName="nome" class="form-control">
+    <label for="numeroConta">Numero Conta</label>
+    <input type="number" name="numeroConta" id="numeroConta" formControlName="numeroConta" class="form-control">
+  </div>  
+  <div class="col-md-12 m-b-3">
+    <label for="agencia">Agência</label>
+    <input type="number" name="agencia" id="agencia" formControlName="agencia" class="form-control">
+    <label for="chequeEspecialLiberado">Cheque Especial Liberado</label>
+    <select name="chequeEspecialLiberado" id="chequeEspecialLiberado" formControlName="chequeEspecialLiberado" class="form-control">
+      <option value="true">Liberado</option>
+      <option value="false">Não Liberado</option>
+    </select>
+  </div>      
+  <div class="col-md-12 m-b-3">
+    <label for="saldo">Saldo</label>
+    <input type="number" name="saldo" id="saldo" formControlName="saldo" class="form-control">
+    <label for="chequeEspecial">Valor Cheque Especial</label>
+    <input type="number" name="chequeEspecial" id="chequeEspecial" formControlName="chequeEspecial" class="form-control">
+  </div>  
+  <div class="col-md-12 m-b-3">
+    <label for="taxa">Taxa</label>
+    <input type="number" name="taxa" id="taxa" formControlName="taxa" class="form-control">
+  </div>  
+  <div class="col-md-12 wrapper">
+    <button class="btn btn-default" (click)="voltar()">Voltar</button>
+    <button class="btn btn-success" (click)="salvar()" [disabled]="form.invalid">Confirmar</button>    
+  </div>
+</form>
