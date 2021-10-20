@@ -1,0 +1,20 @@
+<form [formGroup]="form" autocomplete="off">  
+  <div class="col-md-12">
+    <div class="col-md-3">
+      <input placeholder="Nome" type="text" name="nome" id="nome" formControlName="nome" class="form-control">  
+    </div>
+    <div class="col-md-3">
+      <input placeholder="Agência" type="number" name="agencia" id="agencia" formControlName="agencia" class="form-control">  
+    </div>
+    <div class="col-md-3">
+      <select name="chequeEspecialLiberado" id="chequeEspecialLiberado" formControlName="chequeEspecialLiberado" class="form-control">
+        <option value="" selected>Selecione um tipo de cheque</option>
+        <option value="true">Liberado</option>
+        <option value="false">Não Liberado</option>
+      </select>
+    </div>
+    <div class="col-md-3">
+      <button class="btn btn-default" (click)="filtrar()">Buscar</button>      
+    </div>
+  </div>
+</form>
