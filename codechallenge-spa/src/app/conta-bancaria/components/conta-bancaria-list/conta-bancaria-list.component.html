@@ -1,0 +1,38 @@
+<div class="card-container">
+  <a class="pull-right btn btn-success" tabindex="0" routerLink="/cadastrar">
+    Nova Conta Bancária
+  </a>
+</div>
+<h3>Lista de Contas Bancárias</h3>
+<app-conta-bancaria-form (onSubmit)="filtrar($event)"></app-conta-bancaria-form>
+<div class="col-md-12">
+  <div class="col-md-12">
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Número da Conta</th>
+          <th>Agência</th>
+          <th>Cheque Especial Liberado</th>
+          <th>Saldo</th>
+          <th>Cheque Especial</th>
+          <th>Taxa</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="!contasBancarias.length"><td>Nenhuma conta bancária encontrada</td></tr>
+        <tr *ngFor="let contaBancaria of contasBancarias">
+            <td>{{contaBancaria.nome}}</td>
+            <td>{{contaBancaria.numeroConta}}</td>
+            <td>{{contaBancaria.agencia}}</td>
+            <td>{{contaBancaria.chequeEspecialLiberado? 'Liberado' : 'Não Liberado' }}</td>
+            <td>{{contaBancaria.saldo | currency : 'R$' }}</td>
+            <td>{{contaBancaria.chequeEspecial | currency : 'R$' }}</td>
+            <td>{{contaBancaria.taxa }} %</td>
+            <td><a [routerLink]="['/detalhes/', contaBancaria.numeroConta]">Detalhes</a> | <a [routerLink]="['/editar/', contaBancaria.id]" routerLinkActive="active">Editar</a> | <a (click)="deletarContaBancaria(contaBancaria.id)">Excluir</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
