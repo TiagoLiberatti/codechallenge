@@ -1,0 +1,25 @@
+version: '3.7'
+
+networks:
+  codechallenge-net:
+    external: false
+    name: codechallenge-net
+
+services:
+  codechallenge-api:
+    build:
+      context: .
+      dockerfile: ./codechallenge-api/Dockerfile
+    container_name: codechallenge-api
+    networks:
+      - codechallenge-net
+    ports:
+    - 8080:8080
+
+  codechallenge-spa:
+    build: ./codechallenge-spa
+    container_name: codechallenge-spa
+    networks:
+      - codechallenge-net
+    ports:
+      - 4200:80
