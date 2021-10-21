@@ -33,6 +33,7 @@ export class ContaBancariaListComponent implements OnInit {
           this.contasBancarias = data;
         }else{
           this.toastr.error('Nenhuma conta bancária encontrada', '');
+          this.contasBancarias = [];
         }
       },
       () => {
@@ -55,6 +56,7 @@ export class ContaBancariaListComponent implements OnInit {
           this.contasBancarias = data;
         }else{
           this.toastr.error('Nenhuma conta bancária encontrada', '');
+          this.contasBancarias = [];
         }
       },
       () => {

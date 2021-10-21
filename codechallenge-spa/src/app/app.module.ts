@@ -1,5 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import localePt from '@angular/common/locales/pt';
+import {registerLocaleData} from '@angular/common';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -14,6 +16,7 @@ import { ContaBancariaEditComponent } from './conta-bancaria/components/conta-ba
 import { ContaBancariaFormComponent } from './conta-bancaria/components/conta-bancaria-form/conta-bancaria-form.component';
 import { ContaBancariaListComponent } from './conta-bancaria/components/conta-bancaria-list/conta-bancaria-list.component';
 
+registerLocaleData(localePt)
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +34,10 @@ import { ContaBancariaListComponent } from './conta-bancaria/components/conta-ba
     HttpClientModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [{
+    provide: LOCALE_ID,
+    useValue: "pt-BR"
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
