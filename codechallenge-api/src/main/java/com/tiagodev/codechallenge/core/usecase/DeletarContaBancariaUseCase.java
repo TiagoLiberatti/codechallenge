@@ -7,6 +7,8 @@ import com.tiagodev.codechallenge.dataprovider.exceptions.DataProviderException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import static com.tiagodev.codechallenge.utils.MessageExceptionUtil.ERRO_DELETAR_CONTA_BANCARIA_USE_CASE;
+
 @Component
 public class DeletarContaBancariaUseCase {
 
@@ -21,7 +23,7 @@ public class DeletarContaBancariaUseCase {
         try{
             this.contaBancariaGateway.deletarContaBancaria(idContaBancaria);
         }catch (DataProviderException e){
-            throw new UseCaseException("Ocorreu um erro ao deletar uma conta bancaria");
+            throw new UseCaseException(ERRO_DELETAR_CONTA_BANCARIA_USE_CASE);
         }
     }
 

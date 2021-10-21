@@ -20,6 +20,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.List;
 import java.util.Optional;
 
+import static com.tiagodev.codechallenge.utils.MessageExceptionUtil.*;
+
 @RunWith(SpringRunner.class)
 public class ContaBancariaDataProviderTest {
 
@@ -57,20 +59,10 @@ public class ContaBancariaDataProviderTest {
                 .thenThrow(RecoverableDataAccessException.class);
 
         expectedException.expect(DataProviderException.class);
-        expectedException.expectMessage("Ocorreu um erro ao buscar conta bancaria por ID");
+        expectedException.expectMessage(ERRO_BUSCAR_CONTA_BANCARIA_POR_ID);
 
         contaBancariaDataProvider.buscarContaBancariaPorId(ID_CONTA_BANCARIA);
     }
-
-//    @Test
-//    public void naoDeveBuscarContaBancariaPorIdNotFoundException() {
-//        Mockito.when(this.contaBancariaRepository.findById(ID_CONTA_BANCARIA)).thenReturn(null);
-//
-//        expectedException.expect(NotFoundException.class);
-//        expectedException.expectMessage(String.format("Conta bancária com id %s não existe", ID_CONTA_BANCARIA));
-//
-//        contaBancariaDataProvider.buscarContaBancariaPorId(ID_CONTA_BANCARIA);
-//    }
 
     @Test
     public void deveBuscarContaBancariaPorNumero() {
@@ -85,7 +77,7 @@ public class ContaBancariaDataProviderTest {
                 .thenThrow(RecoverableDataAccessException.class);
 
         expectedException.expect(DataProviderException.class);
-        expectedException.expectMessage("Ocorreu um erro ao buscar conta bancaria por numero");
+        expectedException.expectMessage(ERRO_BUSCAR_CONTA_BANCARIA_POR_NUMERO);
 
         contaBancariaDataProvider.buscarContaBancariaPorNumero(NUMERO_CONTA_BANCARIA);
     }
@@ -105,7 +97,7 @@ public class ContaBancariaDataProviderTest {
                 .thenThrow(RecoverableDataAccessException.class);
 
         expectedException.expect(DataProviderException.class);
-        expectedException.expectMessage("Ocorreu um erro ao buscar lista de contas bancarias");
+        expectedException.expectMessage(ERRO_BUSCAR_LISTA_CONTAS_BANCARIAS);
 
         contaBancariaDataProvider.buscarContasBancarias(NOME_CONTA_BANCARIA, AGENCIA_CONTA_BANCARIA, CHEQUE_ESPECIAL_CONTA_BANCARIA);
     }
@@ -123,7 +115,7 @@ public class ContaBancariaDataProviderTest {
         Mockito.when(this.contaBancariaRepository.saveAll(CONTA_BANCARIA_TABLE_LIST)).thenThrow(RecoverableDataAccessException.class);
 
         expectedException.expect(DataProviderException.class);
-        expectedException.expectMessage("Ocorreu um erro ao salvar uma lista de contas bancarias");
+        expectedException.expectMessage(ERRO_SALVAR_LISTA_CONTAS_BANCARIAS);
 
         contaBancariaDataProvider.salvarContasBancarias(CONTA_BANCARIA_ENTITY_LIST);
     }
@@ -141,7 +133,7 @@ public class ContaBancariaDataProviderTest {
         Mockito.when(this.contaBancariaRepository.save(CONTA_BANCARIA_TABLE)).thenThrow(RecoverableDataAccessException.class);
 
         expectedException.expect(DataProviderException.class);
-        expectedException.expectMessage("Ocorreu um erro ao salvar uma conta bancaria");
+        expectedException.expectMessage(ERRO_SALVAR_CONTA_BANCARIA);
 
         contaBancariaDataProvider.salvarContaBancaria(CONTA_BANCARIA_ENTITY);
     }
@@ -159,7 +151,7 @@ public class ContaBancariaDataProviderTest {
         Mockito.when(this.contaBancariaRepository.save(CONTA_BANCARIA_TABLE)).thenThrow(RecoverableDataAccessException.class);
 
         expectedException.expect(DataProviderException.class);
-        expectedException.expectMessage("Ocorreu um erro ao atualizar uma conta bancaria");
+        expectedException.expectMessage(ERRO_ATUALIZAR_CONTA_BANCARIA);
 
         contaBancariaDataProvider.atualizarContaBancaria(CONTA_BANCARIA_ENTITY);
     }
@@ -175,7 +167,7 @@ public class ContaBancariaDataProviderTest {
         Mockito.doThrow(RecoverableDataAccessException.class).when(contaBancariaRepository).deleteById(ID_CONTA_BANCARIA);
 
         expectedException.expect(DataProviderException.class);
-        expectedException.expectMessage("Ocorreu um erro ao deletar uma conta bancaria");
+        expectedException.expectMessage(ERRO_DELETAR_CONTA_BANCARIA);
 
         contaBancariaDataProvider.deletarContaBancaria(ID_CONTA_BANCARIA);
     }

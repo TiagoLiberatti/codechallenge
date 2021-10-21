@@ -12,6 +12,8 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.util.List;
 
+import static com.tiagodev.codechallenge.utils.MessageExceptionUtil.ERRO_SALVAR_LISTA_CONTAS_BANCARIAS_USE_CASE;
+
 @Component
 public class SalvarContasBancariasUseCase {
 
@@ -30,7 +32,7 @@ public class SalvarContasBancariasUseCase {
         try{
             return this.contaBancariaGateway.salvarContasBancarias(contaBancariaEntityList);
         }catch (DataProviderException e){
-            throw new UseCaseException("Ocorreu um erro ao salvar lista de contas bancarias");
+            throw new UseCaseException(ERRO_SALVAR_LISTA_CONTAS_BANCARIAS_USE_CASE);
         }
     }
 

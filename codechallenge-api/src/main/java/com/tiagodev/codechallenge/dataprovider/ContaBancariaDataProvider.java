@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.tiagodev.codechallenge.utils.MessageExceptionUtil.*;
+
 @Component
 public class ContaBancariaDataProvider implements ContaBancariaGateway {
 
@@ -26,10 +28,10 @@ public class ContaBancariaDataProvider implements ContaBancariaGateway {
     public ContaBancariaEntity buscarContaBancariaPorId(Long idContaBancaria) {
         try{
             ContaBancariaTable contaBancaria = this.contaBancariaRepository.findById(idContaBancaria).orElseThrow(() ->
-                    new NotFoundException(String.format("Conta bancária com id %s não existe", idContaBancaria)));
+                    new NotFoundException(String.format(CONTA_BANCARIA_ID_NAO_EXISTE, idContaBancaria)));
             return ContaBancariaMapper.INSTANCE.tableToEntity(contaBancaria);
         }catch (DataAccessException e){
-            throw new DataProviderException("Ocorreu um erro ao buscar conta bancaria por ID");
+            throw new DataProviderException(ERRO_BUSCAR_CONTA_BANCARIA_POR_ID);
         }
     }
 
@@ -39,11 +41,11 @@ public class ContaBancariaDataProvider implements ContaBancariaGateway {
             ContaBancariaTable contaBancaria = this.contaBancariaRepository.findOneByNumeroConta(idContaBancaria);
 
             if(contaBancaria == null)
-                throw new NotFoundException(String.format("Conta bancária de número %s não existe", idContaBancaria));
+                throw new NotFoundException(String.format(CONTA_BANCARIA_NUMERO_NAO_EXISTE, idContaBancaria));
 
             return ContaBancariaMapper.INSTANCE.tableToEntity(contaBancaria);
         }catch (DataAccessException e){
-            throw new DataProviderException("Ocorreu um erro ao buscar conta bancaria por numero");
+            throw new DataProviderException(ERRO_BUSCAR_CONTA_BANCARIA_POR_NUMERO);
         }
     }
 
@@ -53,7 +55,7 @@ public class ContaBancariaDataProvider implements ContaBancariaGateway {
             List<ContaBancariaTable> contasBancarias = this.contaBancariaRepository.findAllByNomeAgenciaChequeEspecial(nome, agencia, chequeEspecialLiberado);
             return contasBancarias.stream().map(ContaBancariaMapper.INSTANCE::tableToEntity).collect(Collectors.toList());
         }catch (DataAccessException e){
-            throw new DataProviderException("Ocorreu um erro ao buscar lista de contas bancarias");
+            throw new DataProviderException(ERRO_BUSCAR_LISTA_CONTAS_BANCARIAS);
         }
     }
 
@@ -65,7 +67,7 @@ public class ContaBancariaDataProvider implements ContaBancariaGateway {
             List<ContaBancariaTable> contasBancariasList = this.contaBancariaRepository.saveAll(contasBancariasTableList);
             return contasBancariasList.stream().map(ContaBancariaMapper.INSTANCE::tableToEntity).collect(Collectors.toList());
         }catch (DataAccessException e){
-            throw new DataProviderException("Ocorreu um erro ao salvar uma lista de contas bancarias");
+            throw new DataProviderException(ERRO_SALVAR_LISTA_CONTAS_BANCARIAS);
         }
     }
 
@@ -75,7 +77,7 @@ public class ContaBancariaDataProvider implements ContaBancariaGateway {
             ContaBancariaTable contaBancariaTable = ContaBancariaMapper.INSTANCE.entityListToTableList(contaBancaria);
             return ContaBancariaMapper.INSTANCE.tableToEntity(this.contaBancariaRepository.save(contaBancariaTable));
         }catch (DataAccessException e){
-            throw new DataProviderException("Ocorreu um erro ao salvar uma conta bancaria");
+            throw new DataProviderException(ERRO_SALVAR_CONTA_BANCARIA);
         }
     }
 
@@ -85,7 +87,7 @@ public class ContaBancariaDataProvider implements ContaBancariaGateway {
             ContaBancariaTable contaBancariaTable = ContaBancariaMapper.INSTANCE.entityListToTableList(contaBancaria);
             return ContaBancariaMapper.INSTANCE.tableToEntity(this.contaBancariaRepository.save(contaBancariaTable));
         }catch (DataAccessException e){
-            throw new DataProviderException("Ocorreu um erro ao atualizar uma conta bancaria");
+            throw new DataProviderException(ERRO_ATUALIZAR_CONTA_BANCARIA);
         }
     }
 
@@ -94,7 +96,7 @@ public class ContaBancariaDataProvider implements ContaBancariaGateway {
         try{
             this.contaBancariaRepository.deleteById(idContaBancaria);
         }catch (DataAccessException e){
-            throw new DataProviderException("Ocorreu um erro ao deletar uma conta bancaria");
+            throw new DataProviderException(ERRO_DELETAR_CONTA_BANCARIA);
         }
     }
 

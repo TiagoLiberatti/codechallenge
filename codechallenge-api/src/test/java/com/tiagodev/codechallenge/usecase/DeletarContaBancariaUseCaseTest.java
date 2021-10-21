@@ -19,6 +19,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
 
+import static com.tiagodev.codechallenge.utils.MessageExceptionUtil.ERRO_DELETAR_CONTA_BANCARIA_USE_CASE;
+
 @RunWith(SpringRunner.class)
 public class DeletarContaBancariaUseCaseTest {
 
@@ -53,7 +55,7 @@ public class DeletarContaBancariaUseCaseTest {
         Mockito.doThrow(DataProviderException.class).when(this.contaBancariaGateway).deletarContaBancaria(Mockito.anyLong());
 
         expectedException.expect(UseCaseException.class);
-        expectedException.expectMessage("Ocorreu um erro ao deletar uma conta");
+        expectedException.expectMessage(ERRO_DELETAR_CONTA_BANCARIA_USE_CASE);
 
         deletarContaBancariaUseCase.executar(Mockito.anyLong());
     }

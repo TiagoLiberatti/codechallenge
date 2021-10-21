@@ -19,6 +19,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
 
+import static com.tiagodev.codechallenge.utils.MessageExceptionUtil.ERRO_BUSCAR_LISTA_CONTAS_BANCARIAS_USE_CASE;
+
 @RunWith(SpringRunner.class)
 public class BuscarContasBancariasUseCaseTest {
 
@@ -54,7 +56,7 @@ public class BuscarContasBancariasUseCaseTest {
         Mockito.when(this.contaBancariaGateway.buscarContasBancarias(Mockito.anyString(), Mockito.anyString(), Mockito.anyBoolean())).thenThrow(DataProviderException.class);
 
         expectedException.expect(UseCaseException.class);
-        expectedException.expectMessage("Ocorreu um erro ao consultar contas bancárias");
+        expectedException.expectMessage(ERRO_BUSCAR_LISTA_CONTAS_BANCARIAS_USE_CASE);
 
         buscarContasBancariasUseCase.executar(Mockito.anyString(), Mockito.anyString(), Mockito.anyBoolean());
     }

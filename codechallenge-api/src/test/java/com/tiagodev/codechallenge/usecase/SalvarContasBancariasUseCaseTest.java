@@ -22,6 +22,8 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
 
+import static com.tiagodev.codechallenge.utils.MessageExceptionUtil.ERRO_SALVAR_LISTA_CONTAS_BANCARIAS_USE_CASE;
+
 @RunWith(SpringRunner.class)
 public class SalvarContasBancariasUseCaseTest {
 
@@ -62,7 +64,7 @@ public class SalvarContasBancariasUseCaseTest {
         Mockito.when(this.contaBancariaGateway.salvarContasBancarias(CONTA_BANCARIA_ENTITY_LIST)).thenThrow(DataProviderException.class);
 
         expectedException.expect(UseCaseException.class);
-        expectedException.expectMessage("Ocorreu um erro ao salvar lista de contas");
+        expectedException.expectMessage(ERRO_SALVAR_LISTA_CONTAS_BANCARIAS_USE_CASE);
 
         salvarContasBancariasUseCase.executar();
     }

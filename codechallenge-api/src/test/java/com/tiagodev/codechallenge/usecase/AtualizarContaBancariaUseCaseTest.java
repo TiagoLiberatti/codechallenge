@@ -5,16 +5,21 @@ import com.tiagodev.codechallenge.core.exceptions.UseCaseException;
 import com.tiagodev.codechallenge.core.usecase.AtualizarContaBancariaUseCase;
 import com.tiagodev.codechallenge.core.usecase.gateway.ContaBancariaGateway;
 import com.tiagodev.codechallenge.dataprovider.exceptions.DataProviderException;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
+
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
+
+import static com.tiagodev.codechallenge.utils.MessageExceptionUtil.ERRO_ATUALIZAR_CONTA_BANCARIA_USE_CASE;
 
 @RunWith(SpringRunner.class)
 public class AtualizarContaBancariaUseCaseTest {
@@ -54,7 +59,7 @@ public class AtualizarContaBancariaUseCaseTest {
         Mockito.when(this.contaBancariaGateway.atualizarContaBancaria(CONTA_BANCARIA_ENTITY)).thenThrow(DataProviderException.class);
 
         expectedException.expect(UseCaseException.class);
-        expectedException.expectMessage("Ocorreu um erro ao atualizar conta bancaria");
+        expectedException.expectMessage(ERRO_ATUALIZAR_CONTA_BANCARIA_USE_CASE);
 
         atualizarContaBancariaUseCase.executar(CONTA_BANCARIA_ENTITY, ID_CONTA_BANCARIA);
     }

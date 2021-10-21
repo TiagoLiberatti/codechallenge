@@ -19,6 +19,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
 
+import static com.tiagodev.codechallenge.utils.MessageExceptionUtil.ERRO_SALVAR_CONTA_BANCARIA_USE_CASE;
+
 @RunWith(SpringRunner.class)
 public class SalvarContaBancariaUseCaseTest {
 
@@ -53,7 +55,7 @@ public class SalvarContaBancariaUseCaseTest {
         Mockito.when(this.contaBancariaGateway.salvarContaBancaria(CONTA_BANCARIA_ENTITY)).thenThrow(DataProviderException.class);
 
         expectedException.expect(UseCaseException.class);
-        expectedException.expectMessage("Ocorreu um erro ao salvar uma conta");
+        expectedException.expectMessage(ERRO_SALVAR_CONTA_BANCARIA_USE_CASE);
 
         salvarContaBancariaUseCase.executar(CONTA_BANCARIA_ENTITY);
     }

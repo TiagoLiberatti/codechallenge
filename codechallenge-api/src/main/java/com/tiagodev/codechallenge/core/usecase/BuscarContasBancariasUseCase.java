@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+import static com.tiagodev.codechallenge.utils.MessageExceptionUtil.ERRO_BUSCAR_LISTA_CONTAS_BANCARIAS_USE_CASE;
+
 @Component
 public class BuscarContasBancariasUseCase {
 
@@ -24,7 +26,7 @@ public class BuscarContasBancariasUseCase {
         try{
             return this.contaBancariaGateway.buscarContasBancarias(nome, agencia, chequeEspecialLiberado);
         }catch (DataProviderException e){
-            throw new UseCaseException("Ocorreu um erro ao consultar contas bancárias");
+            throw new UseCaseException(ERRO_BUSCAR_LISTA_CONTAS_BANCARIAS_USE_CASE);
         }
     }
 

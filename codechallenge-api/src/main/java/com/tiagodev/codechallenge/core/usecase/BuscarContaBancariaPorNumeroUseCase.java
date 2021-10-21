@@ -9,6 +9,8 @@ import com.tiagodev.codechallenge.entrypoint.entity.ContaBancariaDetalheHttpResp
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import static com.tiagodev.codechallenge.utils.MessageExceptionUtil.ERRO_BUSCAR_CONTA_BANCARIA_POR_NUMERO_USE_CASE;
+
 @Component
 public class BuscarContaBancariaPorNumeroUseCase {
 
@@ -26,7 +28,7 @@ public class BuscarContaBancariaPorNumeroUseCase {
         try{
             return this.contaBancariaGateway.buscarContaBancariaPorNumero(numeroContaBancaria);
         }catch (DataProviderException e){
-            throw new UseCaseException("Ocorreu um erro ao buscar conta bancaria por numero");
+            throw new UseCaseException(ERRO_BUSCAR_CONTA_BANCARIA_POR_NUMERO_USE_CASE);
         }
     }
 

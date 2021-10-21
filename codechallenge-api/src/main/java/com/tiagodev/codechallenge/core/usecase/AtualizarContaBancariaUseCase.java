@@ -8,6 +8,8 @@ import com.tiagodev.codechallenge.dataprovider.exceptions.DataProviderException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import static com.tiagodev.codechallenge.utils.MessageExceptionUtil.ERRO_ATUALIZAR_CONTA_BANCARIA_USE_CASE;
+
 @Component
 public class AtualizarContaBancariaUseCase {
 
@@ -24,7 +26,7 @@ public class AtualizarContaBancariaUseCase {
             contaBancariaEntity.setId(contaBancaria.getId());
             return this.contaBancariaGateway.atualizarContaBancaria(contaBancariaEntity);
         }catch (DataProviderException e){
-            throw new UseCaseException("Ocorreu um erro ao atualizar conta bancaria");
+            throw new UseCaseException(ERRO_ATUALIZAR_CONTA_BANCARIA_USE_CASE);
         }
     }
 

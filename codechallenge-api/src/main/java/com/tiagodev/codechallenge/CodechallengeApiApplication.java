@@ -12,7 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class CodechallengeApiApplication implements ApplicationRunner {
 
 	@Autowired
-	private SalvarContasBancariasUseCase salvarContaBancariaUseCase;
+	private SalvarContasBancariasUseCase salvarContasBancariasUseCase;
 
 	public static void main(String[] args) {
 		SpringApplication.run(CodechallengeApiApplication.class, args);
@@ -20,7 +20,7 @@ public class CodechallengeApiApplication implements ApplicationRunner {
 
 	@Override
 	public void run(ApplicationArguments applicationArguments) throws Exception {
-		this.salvarContaBancariaUseCase.executar();
+		this.salvarContasBancariasUseCase.executar();
 	}
 
 }
