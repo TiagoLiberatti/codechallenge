@@ -4,6 +4,7 @@ import com.tiagodev.codechallenge.core.entity.ContaBancariaEntity;
 import com.tiagodev.codechallenge.core.exceptions.UseCaseException;
 import com.tiagodev.codechallenge.core.usecase.SalvarContasBancariasUseCase;
 import com.tiagodev.codechallenge.core.usecase.gateway.ContaBancariaGateway;
+import com.tiagodev.codechallenge.core.utils.ConverterPlanilhaUtil;
 import com.tiagodev.codechallenge.dataprovider.exceptions.DataProviderException;
 
 import org.junit.Rule;
@@ -17,6 +18,7 @@ import org.mockito.Mockito;
 
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -28,6 +30,9 @@ public class SalvarContasBancariasUseCaseTest {
 
     @Mock
     private ContaBancariaGateway contaBancariaGateway;
+
+    @Mock
+    private ConverterPlanilhaUtil converterArquivoPlanilhaUtil;
 
     @Rule
     public final ExpectedException expectedException = ExpectedException.none();
@@ -44,19 +49,22 @@ public class SalvarContasBancariasUseCaseTest {
             .build());
 
     @Test
-    public void deveExecutar(){
-        salvarContasBancariasUseCase.executar(CONTA_BANCARIA_ENTITY_LIST);
+    public void deveExecutar() throws IOException {
+        Mockito.when(converterArquivoPlanilhaUtil.executar()).thenReturn(CONTA_BANCARIA_ENTITY_LIST);
+        salvarContasBancariasUseCase.executar();
         Mockito.verify(contaBancariaGateway, Mockito.times(1)).salvarContasBancarias(CONTA_BANCARIA_ENTITY_LIST);
     }
 
     @Test
-    public void naoDeveExecutar(){
+    public void naoDeveExecutar() throws IOException {
+        Mockito.when(converterArquivoPlanilhaUtil.executar()).thenReturn(CONTA_BANCARIA_ENTITY_LIST);
+
         Mockito.when(this.contaBancariaGateway.salvarContasBancarias(CONTA_BANCARIA_ENTITY_LIST)).thenThrow(DataProviderException.class);
 
         expectedException.expect(UseCaseException.class);
         expectedException.expectMessage("Ocorreu um erro ao salvar lista de contas");
 
-        salvarContasBancariasUseCase.executar(CONTA_BANCARIA_ENTITY_LIST);
+        salvarContasBancariasUseCase.executar();
     }
 
 }

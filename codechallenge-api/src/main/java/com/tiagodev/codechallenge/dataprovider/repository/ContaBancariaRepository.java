@@ -11,10 +11,10 @@ import java.util.List;
 @Repository
 public interface ContaBancariaRepository extends JpaRepository<ContaBancariaTable, Long>{
 
-    @Query(value = "SELECT * FROM conta_bancaria contaBancaria " +
-                   "WHERE (contaBancaria.nome = :nome OR :nome IS NULL) " +
+    @Query(value = "SELECT contaBancaria FROM ContaBancariaTable contaBancaria " +
+                   "WHERE (LOWER(contaBancaria.nome) LIKE LOWER(CONCAT('%',:nome,'%')) OR :nome IS NULL) " +
                    "AND (contaBancaria.agencia = :agencia OR :agencia IS NULL) " +
-                   "AND (contaBancaria.cheque_especial_liberado = :chequeEspecialLiberado OR :chequeEspecialLiberado IS NULL)", nativeQuery = true)
+                   "AND (contaBancaria.chequeEspecialLiberado = :chequeEspecialLiberado OR :chequeEspecialLiberado IS NULL)")
     List<ContaBancariaTable> findAllByNomeAgenciaChequeEspecial(@Param("nome") String nome, @Param("agencia") String agencia,
                                                                 @Param("chequeEspecialLiberado") Boolean chequeEspecialLiberado);
 
